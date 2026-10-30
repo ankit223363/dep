@@ -1,0 +1,21 @@
+{
+ "banned": {
+  "colour": "color",
+  "grey": "gray",
+  "towards": "toward"
+ },
+ "allow_context": {},
+ "filler": [
+  "quite",
+  "very",
+  "a thing that",
+  "as if",
+  "somehow",
+  "seems to",
+  "a little",
+  "rather",
+  "a long moment",
+  "for a long time"
+ ],
+ "filler_max_per_1000": 6
+}
