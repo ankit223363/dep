@@ -21,6 +21,12 @@ for w, fix in g["banned"].items():
         ctx = body[max(0, m.start()-12):m.end()+12].replace("\n", " ")
         bad.append(f"'{w}' -> use '{fix}': ...{ctx}...")
 print("\n".join(bad) or "ok"); fails += bad
+print("-- RULE WARNINGS --")
+rw = []
+for pat, msg in g.get("warn_patterns", {}).items():
+    for m in re.finditer(pat, body):
+        rw.append(f"{msg}: ...{body[max(0,m.start()-20):m.end()+20]!r}")
+print("\n".join(rw) or "ok"); fails += [r for r in rw if "filler" not in r]
 print("\n-- FILLER (max %s per 1000 words each) --" % g["filler_max_per_1000"])
 flag = False
 for w in g["filler"]:

@@ -6,7 +6,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent)); import nk
 root = nk.root()
 n = int(sys.argv[1])
-for name in ["bible", "characters", "knowledge", "threads"]:
+for name in ["rulebook", "bible", "characters", "knowledge", "threads"]:
     print((root/"canon"/f"{name}.md").read_text().strip(), "\n")
 facts = "\n".join(p.read_text() for p in sorted((root/"canon"/"facts").glob("*.md")))
 blocks = re.split(r"(?m)^(?=## ch)", facts)

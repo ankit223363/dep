@@ -4,7 +4,15 @@
   "grey": "gray",
   "towards": "toward"
  },
- "allow_context": {},
+ "allow_context": {
+  "smith": [
+   "Smith\\b"
+  ],
+  "coat": [
+   "coating",
+   "coated"
+  ]
+ },
  "filler": [
   "quite",
   "very",
@@ -17,5 +25,8 @@
   "a long moment",
   "for a long time"
  ],
- "filler_max_per_1000": 6
+ "filler_max_per_1000": 6,
+ "warn_patterns": {
+  "(pouch|storage ring|spatial)[^.]{0,80}(alive|living|beast)": "Living things cannot go in storage items (use a beast bag)"
+ }
 }
