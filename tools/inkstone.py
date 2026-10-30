@@ -8,6 +8,8 @@
 import json, sys
 sys.path.insert(0, __import__("os").path.dirname(__file__)); import nk
 c = nk.cfg(); a = sys.argv[1:]
+import os
+if os.environ.get("NK_REF"): c["raw_base"] = c["raw_base"].replace("/" + c["branch"] + "/", "/" + os.environ["NK_REF"] + "/")  # commit SHA beats the raw CDN cache
 if not a: sys.exit(__doc__)
 HELP = """const B='%s';const I=window.__ink={sleep:ms=>new Promise(r=>setTimeout(r,ms)),btn:t=>[...document.querySelectorAll('button')].find(b=>b.textContent.trim().toLowerCase()===t),async get(n){const x=await fetch(B+'ch'+String(n).padStart(2,'0')+'.json?v='+Date.now(),{cache:'no-store'});if(!x.ok)throw new Error('fetch '+n+' '+x.status);return x.json();},async fill(c){const i=document.querySelector('input[placeholder="Title Here"]');Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(i,c.title);i.dispatchEvent(new Event('input',{bubbles:true}));const ed=tinymce.editors[0];ed.setContent(c.html);ed.undoManager.add();ed.fire('change');ed.fire('input');await I.sleep(700);return i;},async save(n){const c=await I.get(n);await I.sleep(1500);const i=await I.fill(c);[...document.querySelectorAll('*')].find(e=>e.children.length===0&&e.textContent.trim().toLowerCase()==='update').click();await I.sleep(2500);return {n,saved:/saved/i.test(document.body.innerText),title:i.value,words:(document.body.innerText.match(/[\\d,]+ words/g)||[])[0]};},async publishNew(n){const c=await I.get(n);[...document.querySelectorAll('button')].find(e=>e.textContent.trim()==='CREATE CHAPTER').click();await I.sleep(2500);await I.fill(c);I.btn('publish').click();await I.sleep(1800);I.btn('confirm').click();await I.sleep(2500);const nn=I.btn('not now');if(nn)nn.click();await I.sleep(2500);return {n};}};'ready'""" % c["raw_base"]
 cmd = a[0]
